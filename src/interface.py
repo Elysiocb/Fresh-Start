@@ -1,3 +1,4 @@
+import threading
 import tkinter as tk
 from tkinter import ttk #why do i need to import ttk when i already imported tk??? short anwser: the "Treeview" needs it somehow.
 
@@ -21,11 +22,14 @@ class Interface(tk.Tk): #tk.Tk is the main window class in tkinter, we are inher
         self.install.pack(side="left", padx=10, pady=10)
         self.install.config(relief="raised", )
 
-        self.search = tk.Button(self.upperFrame, text="Search",command=self.engine.winget_search)
-        self.search.pack(side="left", padx=10, pady=10)
-
         self.update = tk.Button(self.upperFrame, text="Update",command=self.engine.winget_update)
         self.update.pack(side="left", padx=10, pady=10)
+
+        self.searchEntry = tk.Entry(self.upperFrame)
+        self.searchEntry.pack(side="left", padx=10, pady=10)
+
+        self.search = tk.Button(self.upperFrame, text="Search", command=lambda: self.engine.winget_search(self.searchEntry.get()))
+        self.search.pack(side="left", padx=10, pady=10)
 
         self.configuration = tk.Button(self.upperFrame, text="Configuration",command=self.engine.configuration)
         self.configuration.pack(side="right", padx=10, pady=10)

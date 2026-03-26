@@ -1,8 +1,28 @@
 import os
 import json
 
-class osModule():
+class SystemUtils():
     def __init__(self):
+        pass
+
+    def get_json(self, json_path: str= 'applist.json') -> dict:
+        self.__annotations__
+
+
+        if not os.path.exists(json_path):
+            print("Failed to find 'applist.json'.")
+            return KeyError("'applist.json' not found.")#i dont really know what this does, i hope it raises an error message correctly
+
+        try:
+            with open(json_path, 'r', encoding='utf-8') as f: #with does automatic closing of the file, and utf-8 encoding to support special characters
+                return json.load(f) #i think this is right... 
+
+        except json.JSONDecodeError as e:
+            print(f"Invalid JSON format in 'applist.json'\nDetails: {e}")
+            return e #meh this ill do. maybe
+        
+    def json_json(self):
+        # json.encoder
         pass
 
     def remove_shortcuts(self, app_id: str, remove_desktop: bool, remove_start_menu: bool) -> None:
@@ -35,17 +55,3 @@ class osModule():
                             print(f"Shortcut removed: {file_path}")
                         except Exception as e: #error meh why not
                             print(f"Failed to remove shortcut {file_path}: {e}")
-
-    def get_json(self, json_path: str= 'applist.json') -> dict:
-
-        if not os.path.exists(json_path):
-            print("Failed to find 'applist.json'.")
-            return KeyError("'applist.json' not found.")#i dont really know what this does, i hope it raises an error message correctly
-
-        try:
-            with open(json_path, 'r', encoding='utf-8') as f: #with does automatic closing of the file, and utf-8 encoding to support special characters
-                return json.load(f) #i think this is right... 
-        
-        except json.JSONDecodeError as e:
-            print(f"Invalid JSON format in 'applist.json'\nDetails: {e}")
-            return e #meh this ill do. maybe

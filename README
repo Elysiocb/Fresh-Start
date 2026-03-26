@@ -1,15 +1,42 @@
 #############################
 # PROTOTYPE 0.1
-# Instala tudo de apps.json usando winget, e avisa quando terminar.
 #############################
 
-#FEATURES TODO
 
-#inicia e pega a lingua nativa do usuario, para instalar os apps na lingua correta
-
-#interface pede pro usuario criar uma lista de apps para instalar a partir de um browser de ids.
-
-#pergunta configurações de instalação adicionais (menu iniciar, barra de tarefas, etc.)
-
-#instala os apps em ordem, avisando o progresso.
 #############################
+# Requirements Gathering
+#############################
+
+# Functional Requirements:
+
+Before installing/updating requires Admin permission
+
+
+# Non-Functional Requirements:
+
+interface pede pro usuario criar uma lista de apps para instalar a partir de um browser de ids.
+
+pergunta configurações de instalação adicionais (menu iniciar, barra de tarefas, etc.)
+
+instala os apps em ordem, avisando o progresso.
+
+inicia e pega a lingua nativa do usuario, para instalar os apps na lingua correta
+
+
+
+#############################
+# DISCLAIMER
+#############################
+This project uses the python library "subprocess" to handle os related operations.
+
+also, subprocess have some inconpatibilitys as listed below:
+
+"Availability: not Android, not iOS, not WASI.
+This module is not supported on mobile platforms or WebAssembly platforms."
+
+therefore, any listed plataform will also automatically be incompatible with this project.
+
+# DISCLAMER OF THE DISCLAMEIR 
+
+actually, it uses winget in the command, so its windows only
+(PS. take a look at nix, it seems to be the equivalent in linux/macos)

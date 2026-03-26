@@ -1,0 +1,10 @@
+{
+    "Configuration": {
+        "Languange": "en",
+        
+        "Shortcuts": {
+            "start_menu": true,
+            "desktop_shortcut": true
+        }   
+    }
+}
