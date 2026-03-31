@@ -5,25 +5,42 @@ class SystemUtils():
     def __init__(self):
         pass
 
-    def get_json(self, json_path: str= 'applist.json') -> dict:
-        self.__annotations__
+    def get_json(self, json_path: str= 'assets/applist.json') -> list:
+        
+        json_path = os.path.join(os.path.dirname(__file__), json_path)
 
+        #print(self.get_json.__annotations__)
 
-        if not os.path.exists(json_path):
-            print("Failed to find 'applist.json'.")
-            return KeyError("'applist.json' not found.")#i dont really know what this does, i hope it raises an error message correctly
+        # if not os.path.exists(json_path):
+        #     print(f"Failed to find {json_path}.")
+        #     raise KeyError() #i dont really know what this does, i hope it raises an error message correctly P.S: it doesn't
 
         try:
-            with open(json_path, 'r', encoding='utf-8') as f: #with does automatic closing of the file, and utf-8 encoding to support special characters
-                return json.load(f) #i think this is right... 
+            if not os.path.exists(json_path) or os.path.getsize(json_path) == 0:
+                return [] # Retorna uma lista vazia se o arquivo não existir ou estiver vazio
+
+            with open(json_path, 'r', encoding='utf-8') as _file: #with does automatic closing of the file, and utf-8 encoding to support special characters
+                return json.load(_file) #i think this is right... 
 
         except json.JSONDecodeError as e:
-            print(f"Invalid JSON format in 'applist.json'\nDetails: {e}")
-            return e #meh this ill do. maybe
+            #print(f"Invalid JSON format in 'applist.json'\nDetails: {e}")
+            raise e # Re-raise the exception
         
-    def json_json(self):
-        # json.encoder
-        pass
+        except FileNotFoundError as e:
+            #print(f"Failed to find {json_path}.")
+            raise e # Re-raise the exception
+        
+    def set_json(self, data: list, json_path: str= 'assets/applist.json') -> None:
+        
+        json_path = os.path.join(os.path.dirname(__file__), json_path)
+
+        try:
+            with open(json_path, "w", encoding="utf-8") as file_:
+                json.dump(data, file_, indent=4, ensure_ascii=False)
+                return file_ #idk
+
+        except json.JSONDecodeError as e:
+            raise e
 
     def remove_shortcuts(self, app_id: str, remove_desktop: bool, remove_start_menu: bool) -> None:
 
