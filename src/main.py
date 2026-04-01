@@ -7,8 +7,9 @@ def main() -> None:
 
     win_mod = windows_manager.Winget() #create an instance of the wingetModule class, which will be used to interact with the backend logic of the application
     app_interface = interface.Interface(win_mod) #create an instance of the Interface class, passing the wingetModule instance as a parameter to interact with the backend logic of the application
-
-    app_interface.mainloop() #start the main loop of the interface, which will keep the application running and responsive to user interactions
+    
+    app_interface.protocol("WM_DELETE_WINDOW", lambda: (win_mod.remove_json(), app_interface.destroy())) #black magic...
+    app_interface.mainloop() #very self explanatory
 
 #ENTRY POINT
 if __name__ == "__main__":

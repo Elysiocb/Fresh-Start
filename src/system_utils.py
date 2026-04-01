@@ -20,7 +20,7 @@ class SystemUtils():
                 return [] # Retorna uma lista vazia se o arquivo não existir ou estiver vazio
 
             with open(json_path, 'r', encoding='utf-8') as _file: #with does automatic closing of the file, and utf-8 encoding to support special characters
-                return json.load(_file) #i think this is right... 
+                return json.load(_file) #i think this is right... this returns a list of dicts
 
         except json.JSONDecodeError as e:
             #print(f"Invalid JSON format in 'applist.json'\nDetails: {e}")
@@ -41,6 +41,19 @@ class SystemUtils():
 
         except json.JSONDecodeError as e:
             raise e
+
+    def remove_json(self, json_path: str= 'assets/applist.json') -> None:
+
+        json_path = os.path.join(os.path.dirname(__file__), json_path)
+
+        if os.path.exists(json_path):
+            try:
+                os.remove(json_path)
+
+            except FileNotFoundError as e:
+                raise e
+            except Exception as e:
+                raise e
 
     def remove_shortcuts(self, app_id: str, remove_desktop: bool, remove_start_menu: bool) -> None:
 

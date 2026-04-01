@@ -1,0 +1,10 @@
+{
+    "apps": {
+        "Mozzila.Firefox": {
+            "config": {
+                "start_menu": true,
+                "desktop_shortcut": true
+            }
+        }
+    }
+}

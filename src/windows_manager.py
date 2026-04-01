@@ -89,14 +89,14 @@ class Winget(system_utils.SystemUtils): #inherit from SystemUtils to have access
                     start_of_column_id = len(linha[:linha.index("ID")])
                     start_of_column_version = len(linha[:linha.index("Version")]) if "Version" in linha else len(linha[:linha.index("Versão")])
 
-                    print(start_of_column_name, start_of_column_id, start_of_column_version) # Mostra as posições de início de cada coluna
+                    #print(start_of_column_name, start_of_column_id, start_of_column_version)
                     continue
                 
                 # O winget separa as colunas com pelo menos 2 espaços
                 # Usamos regex para quebrar a linha onde houver 2 ou mais espaços
                 partes = re.split(r'\s{2,}', linha.strip())
-                print(f"Line split into parts: {partes}") # Debug: Mostra as partes de cada linha
-
+                #print(f"Line split into parts: {partes}")
+                
                 if len(partes) >= 3:
                     apps_encontrados.append({
                         'Application': partes[0],
@@ -111,8 +111,7 @@ class Winget(system_utils.SystemUtils): #inherit from SystemUtils to have access
                     column_name_value = linha[start_of_column_name:start_of_column_id].strip()
                     column_id_value = linha[start_of_column_id:start_of_column_version].strip()
                     column_version_value = linha[start_of_column_version:].strip()
-                    # print(column_name_value, column_id_value, column_version_value) # Debug: Mostra os valores extraídos usando as posições das colunas
-
+                    # print(column_name_value, column_id_value, column_version_value)
                     apps_encontrados.append({
                         'Application': column_name_value,
                         'Id': column_id_value,
