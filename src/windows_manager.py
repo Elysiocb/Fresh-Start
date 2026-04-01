@@ -96,7 +96,7 @@ class Winget(system_utils.SystemUtils): #inherit from SystemUtils to have access
                 # Usamos regex para quebrar a linha onde houver 2 ou mais espaços
                 partes = re.split(r'\s{2,}', linha.strip())
                 #print(f"Line split into parts: {partes}")
-                
+
                 if len(partes) >= 3:
                     apps_encontrados.append({
                         'Application': partes[0],

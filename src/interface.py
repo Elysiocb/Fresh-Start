@@ -144,7 +144,8 @@ class Interface(tk.Tk): #tk.Tk is the main window class in tkinter, we are inher
 
         # clean old data "applist.json" from previous uses of the program
         try:
-            self.engine.remove_json('assets/applist.json')
+            if self.program_just_started:
+                self.engine.remove_json('assets/applist.json')
         except Exception as e:
             raise e
         finally:
@@ -153,7 +154,7 @@ class Interface(tk.Tk): #tk.Tk is the main window class in tkinter, we are inher
         window.tree.delete(*window.tree.get_children())
 
         data = self.engine.get_json('assets/applist.json') # data is a list of dicts from json
-        
+
         # Create a temporary set of app_ids from the new data
         current_app_ids = {item_data.get('Id') for item_data in data if item_data.get('Id')}
         
@@ -219,9 +220,8 @@ class Interface(tk.Tk): #tk.Tk is the main window class in tkinter, we are inher
         
         def _on_search_button_click(self):
             search_term = self.search_entry.get()
-            if not search_term.strip(): # Verifica se o termo de busca não está vazio ou contém apenas espaços
+            if not search_term.strip(): # if empty search return
                 print("O termo de busca não pode ser vazio.")
-                # Opcional: exibir uma mensagem de erro para o usuário
                 return
 
             # Desabilita o botão de busca para evitar cliques múltiplos durante a busca
